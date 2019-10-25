@@ -1,6 +1,6 @@
 Poky Container
 ========================
-This repo is to create an image that is able to run bitbake/poky. The main
+This repo is to create an image that is able to run bitbake/poky or build openwrt from official sources. The main
 difference between it and https://github.com/crops/yocto-dockerfiles is that
 it has helpers to create users and groups within the container. This is so that
 the output generated in the container will be readable by the user on the
@@ -44,13 +44,13 @@ point.
     to run a container for the first time would be:
 
     ```
-    docker run --rm -it -v /home/myuser/mystuff:/workdir crops/poky --workdir=/workdir
+    docker run --rm -it -v /home/myuser/mystuff:/workdir harshalgohel/openwrt-builder --workdir=/workdir
     ```
     
   * **Windows/Mac**
   
     ```
-    docker run --rm -it -v myvolume:/workdir crops/poky --workdir=/workdir
+    docker run --rm -it -v myvolume:/workdir harshalgohel/openwrt-builder --workdir=/workdir
     ```
 
   Let's discuss the options:
