@@ -13,7 +13,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-FROM crops/yocto:ubuntu-14.04-base
+FROM crops/yocto:ubuntu-16.04-base
 
 USER root
 
@@ -21,7 +21,7 @@ ADD https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_use
         https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_groupadd.sh \
         https://raw.githubusercontent.com/crops/extsdk-container/master/usersetup.py \
         /usr/bin/
-COPY poky-entry.py poky-launch.sh /usr/bin/
+COPY distro-entry.sh poky-entry.py poky-launch.sh /usr/bin/
 COPY sudoers.usersetup /etc/
 RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip bsdmainutils -y
 # For ubuntu, do not use dash.
@@ -46,4 +46,4 @@ RUN userdel -r yoctouser && \
 USER usersetup
 ENV LANG=en_US.UTF-8
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--", "/usr/bin/poky-entry.py"]
+ENTRYPOINT ["/usr/bin/distro-entry.sh", "/usr/bin/dumb-init", "--", "/usr/bin/poky-entry.py"]
