@@ -23,7 +23,7 @@ ADD https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_use
         /usr/bin/
 COPY poky-entry.py poky-launch.sh /usr/bin/
 COPY sudoers.usersetup /etc/
-RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip -y
+RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip bsdmainutils -y
 # For ubuntu, do not use dash.
 RUN which dash &> /dev/null && (\
     echo "dash dash/sh boolean false" | debconf-set-selections && \
