@@ -23,7 +23,46 @@ ADD https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_use
         /usr/bin/
 COPY distro-entry.sh poky-entry.py poky-launch.sh /usr/bin/
 COPY sudoers.usersetup /etc/
-RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip bsdmainutils gcc g++ binutils patch bzip2 flex make gettext pkg-config unzip zlib1g-dev libc6-dev subversion libncurses5-dev gawk sharutils curl libxml-parser-perl ocaml-nox ocaml-nox ocaml ocaml-findlib libpcre3-dev binutils-gold python-yaml sharutils -y
+RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip bsdmainutils gcc g++ binutils patch bzip2 flex make gettext pkg-config unzip zlib1g-dev libc6-dev subversion libncurses5-dev gawk sharutils curl libxml-parser-perl ocaml-nox ocaml-nox ocaml ocaml-findlib libpcre3-dev binutils-gold python-yaml sharutils -y && \
+apt-get install -y \
+        gawk \
+        wget \
+        git-core \
+        subversion \
+        diffstat \
+        unzip \
+        sysstat \
+        texinfo \
+        gcc-multilib \
+        build-essential \
+        chrpath \
+        socat \
+        python \
+        python3 \
+        xz-utils  \
+        locales \
+        screen \
+        tmux \
+        fluxbox \
+        realpath \
+        tightvncserver && \
+    cp -af /etc/skel/ /etc/vncskel/ && \
+    echo "export DISPLAY=1" >>/etc/vncskel/.bashrc && \
+    mkdir  /etc/vncskel/.vnc && \
+    echo "" | vncpasswd -f > /etc/vncskel/.vnc/passwd && \
+    chmod 0600 /etc/vncskel/.vnc/passwd && \
+    useradd -U -m yoctouser && \
+    /usr/sbin/locale-gen en_US.UTF-8
+
+COPY build-install-dumb-init.sh /
+RUN  bash /build-install-dumb-init.sh && \
+     rm /build-install-dumb-init.sh && \
+     apt-get clean
+
+USER yoctouser
+WORKDIR /home/yoctouser
+CMD /bin/bash
+
 # For ubuntu, do not use dash.
 RUN which dash &> /dev/null && (\
     echo "dash dash/sh boolean false" | debconf-set-selections && \
