@@ -23,7 +23,18 @@ ADD https://raw.githubusercontent.com/crops/extsdk-container/master/restrict_use
         /usr/bin/
 COPY distro-entry.sh poky-entry.py poky-launch.sh /usr/bin/
 COPY sudoers.usersetup /etc/
-RUN apt update && apt upgrade -y && apt install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip bsdmainutils gcc g++ binutils patch bzip2 flex make gettext pkg-config unzip zlib1g-dev libc6-dev subversion libncurses5-dev gawk sharutils curl libxml-parser-perl ocaml-nox ocaml-nox ocaml ocaml-findlib libpcre3-dev binutils-gold python-yaml sharutils -y && \
+RUN apt-get update && \
+apt-get upgrade -y && \
+apt-get install subversion build-essential \
+            libncurses5-dev zlib1g-dev gawk \
+            git ccache gettext libssl-dev \
+            xsltproc zip bsdmainutils gcc g++ \
+            binutils patch bzip2 flex make gettext \
+            pkg-config unzip zlib1g-dev libc6-dev \
+            subversion libncurses5-dev gawk sharutils \
+            curl libxml-parser-perl ocaml-nox ocaml-nox \
+            ocaml ocaml-findlib libpcre3-dev \
+            binutils-gold python-yaml sharutils -y && \
 apt-get install -y \
         gawk \
         wget \
@@ -59,9 +70,6 @@ RUN  bash /build-install-dumb-init.sh && \
      rm /build-install-dumb-init.sh && \
      apt-get clean
 
-USER yoctouser
-WORKDIR /home/yoctouser
-CMD /bin/bash
 
 # For ubuntu, do not use dash.
 RUN which dash &> /dev/null && (\
