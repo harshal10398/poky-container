@@ -1,12 +1,5 @@
-Poky Container
+Openwrt/QSDK Builder
 ========================
-This repo is to create an image that is able to run bitbake/poky or build openwrt from official sources. The main
-difference between it and https://github.com/crops/yocto-dockerfiles is that
-it has helpers to create users and groups within the container. This is so that
-the output generated in the container will be readable by the user on the
-host.
-
-The instructions will be slightly different depending on whether Linux, Windows or Mac is used. There are setup instructions for using **Windows/Mac** at https://github.com/crops/docker-win-mac-docs/wiki. When referring to **Windows/Mac** in the rest of the document, it is assumed the instructions at https://github.com/crops/docker-win-mac-docs/wiki were followed.
 
 Running the container
 ---------------------
@@ -31,10 +24,6 @@ point.
 
     For the rest of the Linux instructions we'll assume the workdir chosen was
     `/home/myuser/mystuff`.
-    
-  * **Windows/Mac**
-
-    On Windows or Mac a workdir isn't needed. Instead the volume called *myvolume* will be used. This volume should have been created when following the instructions at https://github.com/crops/docker-win-mac-docs/wiki.
 
 
 * **The docker command**
@@ -44,23 +33,16 @@ point.
     to run a container for the first time would be:
 
     ```
-    docker run --rm -it -v /home/myuser/mystuff:/workdir harshalgohel/openwrt-builder --workdir=/workdir
+    docker run --rm -it -v /home/myuser/mystuff:/workdir harshalgohel/openwrt-builder
     ```
     
-  * **Windows/Mac**
-  
+    Open new terminal and type 
     ```
-    docker run --rm -it -v myvolume:/workdir harshalgohel/openwrt-builder --workdir=/workdir
+    docker ps
     ```
 
-  Let's discuss the options:
-  * **_--workdir=/workdir_**: This causes the container to start in the directory
-    specified. This can be any directory in the container. The container will also use the uid and gid
-    of the workdir as the uid and gid of the user in the container.
+    Check the name of running container, you may also use --name in ```docker run``` command above to specify name.
 
-  This should put you at a prompt similar to:
-  ```
-  pokyuser@3bbac563cacd:/workdir$
-  ```
-  At this point you should be able to follow the same instructions as described
-  in https://www.yoctoproject.org/docs/current/yocto-project-qs/yocto-project-qs.html#releases.
+    ```
+    docker exec -ti -u yoctouser bash
+    ```
