@@ -45,7 +45,7 @@ apt-get install -y \
         locales \
         screen \
         realpath \
-        nano vim && \
+        nano vim gengetopt && \
     cp -af /etc/skel/ /etc/vncskel/ && \
     echo "export DISPLAY=1" >>/etc/vncskel/.bashrc && \
     mkdir  /etc/vncskel/.vnc && \
