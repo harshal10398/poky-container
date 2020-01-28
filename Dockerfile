@@ -45,7 +45,7 @@ apt-get install -y \
         locales \
         screen \
         realpath \
-        nano vim gengetopt \
+        nano vim gengetopt ccrypt\
         u-boot-tools \
         device-tree-compiler; \
 #     cp -af /etc/skel/ /etc/vncskel/ ; \
