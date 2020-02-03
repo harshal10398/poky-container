@@ -48,11 +48,6 @@ apt-get install -y \
         nano vim gengetopt \
         u-boot-tools \
         device-tree-compiler; \
-#     cp -af /etc/skel/ /etc/vncskel/ ; \
-#     echo "export DISPLAY=1" >>/etc/vncskel/.bashrc ; \
-#     mkdir  /etc/vncskel/.vnc && \
-#     echo "" | vncpasswd -f > /etc/vncskel/.vnc/passwd ; \
-#     chmod 0600 /etc/vncskel/.vnc/passwd ; \
     useradd -U -m yoctouser ; \
     /usr/sbin/locale-gen en_US.UTF-8
 
