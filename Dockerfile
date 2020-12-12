@@ -47,7 +47,7 @@ apt-get install -y \
         realpath \
         nano vim gengetopt ccrypt\
         u-boot-tools \
-        device-tree-compiler mtd-utils; \
+        device-tree-compiler mtd-utils libfdt-dev; \
     useradd -U -m yoctouser ; \
     /usr/sbin/locale-gen en_US.UTF-8
 
